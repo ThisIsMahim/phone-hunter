@@ -1,14 +1,17 @@
-const phoneContainer= document.getElementById('phones-container');
-const spinner=document.getElementById('spinner');
+const phoneContainer = document.getElementById("phones-container");
+const spinner = document.getElementById("spinner");
 const modal = document.getElementById("my-modal");
-let btnClicked=false;
+let btnClicked = false;
 
-function loadPhone(searchText){
-    spinner.style.display='flex';
-    fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`).then(res=>res.json()).then(data=>{
-    if(data.status==false){
-        modal.style.display='block';
-        modal.innerHTML=`
+function loadPhone(searchText) {
+  spinner.style.display = "flex";
+  fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.status == false) {
+        modal.style.display = "block";
+        searchBox.value='';
+        modal.innerHTML = `
         <div
 	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
 >
@@ -21,7 +24,7 @@ function loadPhone(searchText){
 		<h3 class="text-lg leading-6 font-medium text-gray-900">Item Not Found!</h3>
 		<div class="mt-2 px-7 py-3">
 			<p class="text-sm text-gray-500">
-				There's no such item named <b>${searchText}</b> in the database
+				There's no such item named <b>"${searchText}"</b> in the database
 			</p>
 		</div>
 		<div class="items-center px-4 py-3">
@@ -35,25 +38,24 @@ function loadPhone(searchText){
 	</div>
 </div>
         `;
-    }
-    let phones= data.data;
-    phoneContainer.innerHTML='';
-    const showAllBtn=document.getElementById('show-all-btn');
-    if (phones.length>12 && !btnClicked){
-        phones=phones.slice(0,12);
-        showAllBtn.classList.remove('hidden');
-    }
-    else
-        {
-            showAllBtn.classList.add('hidden');
-        }
-    
-    phones.forEach(phone => {
-        const phoneCard= document.createElement('div');
-        phoneCard.classList='max-w-xs rounded-lg shadow-lg bg-gray-50 text-gray-800 border-2 border-white hover:border-[#0D6EFD]';
+      }
+      let phones = data.data;
+      phoneContainer.innerHTML = "";
+      const showAllBtn = document.getElementById("show-all-btn");
+      if (phones.length > 12 && !btnClicked) {
+        phones = phones.slice(0, 12);
+        showAllBtn.classList.remove("hidden");
+      } else {
+        showAllBtn.classList.add("hidden");
+      }
+
+      phones.forEach((phone) => {
+        const phoneCard = document.createElement("div");
+        phoneCard.classList =
+          "max-w-xs rounded-lg shadow-lg bg-gray-50 text-gray-800 border-2 border-white hover:border-[#0D6EFD] z-0";
         phoneCard.setAttribute("data-aos", "fade-up");
         phoneCard.setAttribute("data-aos-duration", 300);
-        phoneCard.innerHTML=`
+        phoneCard.innerHTML = `
         <div class="bg-[#0d6dfd0b] flex items-center justify-center w-full h-[300px] rounded-lg">
         <img src="${phone.image}" alt="" class=" object-center  rounded-t-md ">
     </div>
@@ -67,27 +69,28 @@ function loadPhone(searchText){
     </div>
         `;
         phoneContainer.appendChild(phoneCard);
-    spinner.style.display='none';
-    });
+        spinner.style.display = "none";
+      });
     });
 }
-const searchBox= document.getElementById('search-box');
-function searchPhone(){
-    const searchText= searchBox.value;
-    loadPhone(searchText);
+const searchBox = document.getElementById("search-box");
+function searchPhone() {
+  const searchText = searchBox.value;
+  loadPhone(searchText);
 }
-function showAll(){
-    btnClicked=true;
-    searchPhone();
+function showAll() {
+  btnClicked = true;
+  searchPhone();
 }
 
 // showing modal
-function showDetails(id){
-    fetch(`https://openapi.programming-hero.com/api/phone/${id}`).then(res=>res.json())
-    .then(data=>{
+function showDetails(id) {
+  fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
       console.log(data);
       modal.style.display = "block";
-      modal.innerHTML=`
+      modal.innerHTML = `
       <div
       class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
     >
@@ -126,15 +129,14 @@ function showDetails(id){
     </div>
     `;
     });
-} 
- function closeModal(){
-    modal.style.display = "none";
-    modal.innerHTML='';
-    spinner.style.display='none';
-    searchBox.value='';
-    }
-function shopNow(){
-    location.href = '#phones-container';
-    searchBox.value='iphone 13 pro max';
-    loadPhone('iphone 13 pro max');
+}
+function closeModal() {
+  modal.style.display = "none";
+  modal.innerHTML = "";
+  spinner.style.display = "none";
+}
+function shopNow() {
+  location.href = "#phones-container";
+  searchBox.value = "iphone 13 pro max";
+  loadPhone("iphone 13 pro max");
 }

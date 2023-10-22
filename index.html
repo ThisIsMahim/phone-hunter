@@ -15,7 +15,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   </head>
   <body>
-    <header class="bg-[#0d6dfd11] h-screen relative rounded-sm pt-8">
+    <header class="bg-[#0d6dfd11] lg:h-screen md:h-[70vh] h-[80vh] relative rounded-sm pt-8">
       <!-- menu -->
       <div class="flex items-center justify-between w-[90%] mx-auto mb-8">
         <div class="">
@@ -35,7 +35,7 @@
         </h1>
         <p class="text-[#706F6F] w-1/2 text-center">
           There are many variations of passages of Lorem Ipsum available, but
-          the majority have suffered alteration in some form, by injected humou.
+          the majority have suffered alteration in some form, by injected humor.
         </p>
         <button class="btn font-bold text-white bg-[#0D6EFD] hover:bg-blue-700" onclick="shopNow()">Buy Now</button>
         <img
@@ -55,11 +55,20 @@
         />
       </section>
     </header>
-    <main class="mt-16 md:mt-80 flex flex-col">
+    <!-- for phone devices -->
+    <section class="md:hidden flex items-center justify-center">
+      <img
+      src="phone.png"
+      class="w-[293px] h-[585px]"  data-aos="flip-down" data-aos-duration="3000"
+      alt=""
+    />
+    </section>
+<main class=" mt-12 md:mt-80 flex flex-col">
+      <!-- search box -->
       <section
         class="flex flex-col gap-8 items-center justify-center mb-[50px]"
       >
-        <h2 class="font-semibold text-black text-4xl">Search your phone</h2>
+        <h2 class="font-bold text-black text-4xl">Search your phone</h2>
         <div class="flex">
           <input
             type="search"
@@ -76,6 +85,13 @@
           </button>
         </div>
       </section>
+      <!-- popular search -->
+      <div class="w-full flex flex-col md:flex-row gap-6 justify-center items-center mb-[50px]">
+        <h3 class="font-semibold text-black text-2xl">Popular Brands:</h3>
+        <button class="btn bg-[#0d6dfd] hover:bg-blue-700 text-white font-semibold" onclick="loadPhone('apple')">Apple</button>
+        <button class="btn bg-[#0d6dfd] hover:bg-blue-700 text-white font-semibold" onclick="loadPhone('oppo')">Oppo</button>
+        <button class="btn bg-[#0d6dfd] hover:bg-blue-700 text-white font-semibold" onclick="loadPhone('Samsung')">Samsung</button>
+      </div>
       <div>
         <!-- spinner -->
         <div id="spinner" class="items-center justify-center space-x-2 hidden">

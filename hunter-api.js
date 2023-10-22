@@ -25,6 +25,7 @@ function loadPhone(searchText) {
 		<div class="mt-2 px-7 py-3">
 			<p class="text-sm text-gray-500">
 				There's no such item named <b>"${searchText}"</b> in the database
+        <br>N.B: Please check if the search field is empty.
 			</p>
 		</div>
 		<div class="items-center px-4 py-3">
@@ -74,6 +75,10 @@ function loadPhone(searchText) {
     });
 }
 const searchBox = document.getElementById("search-box");
+searchBox.addEventListener("keyup", function(event){
+  if(event.code==="Enter")
+    searchPhone();
+})
 function searchPhone() {
   const searchText = searchBox.value;
   loadPhone(searchText);
@@ -110,12 +115,12 @@ function showDetails(id) {
           </p>
           <p><span class="font-semibold text-black">Storage:</span> ${data.data.mainFeatures.storage}</p>
           <p><span class="font-semibold text-black">Display Size:</span> ${data.data.mainFeatures.displaySize}</p>
-          <p><span class="font-semibold text-black">Chipset:</span> ${data.data.mainFeatures.chipSet}</p>
-          <p><span class="font-semibold text-black">Memory:</span> ${data.data.mainFeatures.memory}</p>
-          <p><span class="font-semibold text-black">Id:</span> ${data.data.slug}</p>
+          <p><span class="font-semibold text-black">Chipset:</span> ${data.data.mainFeatures?.chipSet}</p>
+          <p><span class="font-semibold text-black">Memory:</span> ${data.data.mainFeatures?.memory}</p>
+          <p><span class="font-semibold text-black">Id:</span> ${data.data?.slug}</p>
           <p><span class="font-semibold text-black">Release Date:</span> ${data.data.releaseDate}</p>
           <p><span class="font-semibold text-black">Brand:</span> ${data.data.brand}</p>
-          <p><span class="font-semibold text-black">GPS:</span> ${data.data.others.GPS}</p>
+          <p><span class="font-semibold text-black">GPS:</span> ${data.data.others?.GPS || "No GPS available"}</p>
         </div>
         <div class="items-center px-4 py-3">
           <button

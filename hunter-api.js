@@ -5,12 +5,13 @@ let btnClicked = false;
 
 function loadPhone(searchText) {
   spinner.style.display = "flex";
+  searchBox.value = searchText;
   fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     .then((res) => res.json())
     .then((data) => {
       if (data.status == false) {
         modal.style.display = "block";
-        searchBox.value='';
+        searchBox.value = "";
         modal.innerHTML = `
         <div
 	class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white"
@@ -75,10 +76,9 @@ function loadPhone(searchText) {
     });
 }
 const searchBox = document.getElementById("search-box");
-searchBox.addEventListener("keyup", function(event){
-  if(event.code==="Enter")
-    searchPhone();
-})
+searchBox.addEventListener("keyup", function (event) {
+  if (event.code === "Enter") searchPhone();
+});
 function searchPhone() {
   const searchText = searchBox.value;
   loadPhone(searchText);
@@ -113,14 +113,30 @@ function showDetails(id) {
             It is a long established fact that a reader will be distracted
             by the readable content of a page when looking at its layout.
           </p>
-          <p><span class="font-semibold text-black">Storage:</span> ${data.data.mainFeatures.storage}</p>
-          <p><span class="font-semibold text-black">Display Size:</span> ${data.data.mainFeatures.displaySize}</p>
-          <p><span class="font-semibold text-black">Chipset:</span> ${data.data.mainFeatures?.chipSet}</p>
-          <p><span class="font-semibold text-black">Memory:</span> ${data.data.mainFeatures?.memory}</p>
-          <p><span class="font-semibold text-black">Id:</span> ${data.data?.slug}</p>
-          <p><span class="font-semibold text-black">Release Date:</span> ${data.data.releaseDate}</p>
-          <p><span class="font-semibold text-black">Brand:</span> ${data.data.brand}</p>
-          <p><span class="font-semibold text-black">GPS:</span> ${data.data.others?.GPS || "No GPS available"}</p>
+          <p><span class="font-semibold text-black">Storage:</span> ${
+            data.data.mainFeatures.storage
+          }</p>
+          <p><span class="font-semibold text-black">Display Size:</span> ${
+            data.data.mainFeatures.displaySize
+          }</p>
+          <p><span class="font-semibold text-black">Chipset:</span> ${
+            data.data.mainFeatures?.chipSet
+          }</p>
+          <p><span class="font-semibold text-black">Memory:</span> ${
+            data.data.mainFeatures?.memory
+          }</p>
+          <p><span class="font-semibold text-black">Id:</span> ${
+            data.data?.slug
+          }</p>
+          <p><span class="font-semibold text-black">Release Date:</span> ${
+            data.data.releaseDate
+          }</p>
+          <p><span class="font-semibold text-black">Brand:</span> ${
+            data.data.brand
+          }</p>
+          <p><span class="font-semibold text-black">GPS:</span> ${
+            data.data.others?.GPS || "No GPS available"
+          }</p>
         </div>
         <div class="items-center px-4 py-3">
           <button
@@ -144,4 +160,7 @@ function shopNow() {
   location.href = "#phones-container";
   searchBox.value = "iphone 13 pro max";
   loadPhone("iphone 13 pro max");
+}
+function signUp() {
+  location.href = "signIn.html";
 }
